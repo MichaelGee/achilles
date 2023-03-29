@@ -20,3 +20,11 @@ export const SignupCard = styled("div", {
     width: "100%",
   },
 });
+
+export const ErrorMessage = styled("p", {
+  color: "#F4256D",
+  fontSize: "12px",
+  margin: "0",
+  padding: "0",
+  marginTop: "5px",
+});
