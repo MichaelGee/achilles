@@ -33,6 +33,8 @@ const schema = yup.object().shape({
   confirmPassword: yup.string().oneOf([yup.ref("password")], "Passwords must match"),
 });
 
+/************************/
+
 const Signup = () => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
