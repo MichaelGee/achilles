@@ -20,11 +20,11 @@ export default function App({ Component, pageProps }: AppProps) {
         light: lightTheme.className,
         dark: darkTheme.className,
       }}>
-      <AuthProvider>
-        <NextUIProvider>
+      <NextUIProvider>
+        <AuthProvider>
           <Component {...pageProps} />
-        </NextUIProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </NextUIProvider>
     </NextThemesProvider>
   );
 }

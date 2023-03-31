@@ -1,32 +1,35 @@
 import { auth } from "@/services/firebase";
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useMemo } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+import Loader from "@/components/molecules/Loader/loader";
 
 type AuthContextType = {
   children: React.ReactNode;
 };
 
-// create the auth context
+// create the auth context without null error
 
 export const AuthContext = createContext({} as any);
 
-// create a provider for components to consume and subscribe to changes
-
 export const AuthProvider = ({ children }: AuthContextType) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
-        //@ts-ignore
         setUser(user);
+        setLoading(false);
       } else {
         setUser(null);
+        setLoading(false);
       }
     });
-
-    return () => unsubscribe();
   }, []);
 
-  return <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>;
+  const value = useMemo(() => ({ user, loading }), [user, loading]);
+
+  return (
+    <AuthContext.Provider value={value}>{loading ? <Loader /> : children}</AuthContext.Provider>
+  );
 };

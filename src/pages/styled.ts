@@ -21,7 +21,7 @@ export const ChatInputSection = styled("div", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "20px 0 30px 0",
+  padding: "8px 0 30px 0",
   background: "#000000",
 });
 
@@ -42,7 +42,7 @@ export const ChatBodyContainer = styled("div", {
   overflowY: "auto",
   padding: "10px 0",
   "&::-webkit-scrollbar": {
-    width: "0.4em",
+    width: "2px",
   },
   "&::-webkit-scrollbar-track": {
     boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
@@ -69,9 +69,9 @@ export const Message = styled("div", {
   width: "fit-content",
   maxWidth: "60%",
   wordBreak: "break-word",
-  "&:first-child": {
-    marginTop: "0",
-  },
+  // "&:first-child": {
+  //   marginTop: "0",
+  // },
   // received message
   "&.received": {
     background: "#E4E6EB",

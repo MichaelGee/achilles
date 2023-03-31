@@ -108,8 +108,9 @@ const Signup = () => {
                 type='text'
                 size='lg'
                 placeholder='Email'
-                helperText={errors?.email?.message}
-                status={errors?.email && "error"}
+                helperText={errors?.email && errors?.email?.message}
+                // @ts-ignore
+                status={errors?.email?.message && "error"}
                 fullWidth
                 {...field}
               />
@@ -124,8 +125,9 @@ const Signup = () => {
                 type='password'
                 size='lg'
                 placeholder='Password'
-                helperText={errors?.password?.message}
-                status={errors?.password && "error"}
+                helperText={errors?.password && errors?.password?.message}
+                // @ts-ignore
+                status={errors?.password?.message && "error"}
                 fullWidth
                 {...field}
               />
@@ -140,8 +142,9 @@ const Signup = () => {
                 type='password'
                 size='lg'
                 placeholder='Confirm Password'
-                helperText={errors?.confirmPassword?.message}
-                status={errors?.confirmPassword && "error"}
+                helperText={errors?.confirmPassword && errors?.confirmPassword?.message}
+                // @ts-ignore
+                status={errors?.confirmPassword?.message && "error"}
                 fullWidth
                 {...field}
               />
