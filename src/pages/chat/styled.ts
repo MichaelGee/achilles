@@ -21,7 +21,8 @@ export const ChatInputSection = styled("div", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "0 0 30px 0",
+  padding: "20px 0 30px 0",
+  background: "#000000",
 });
 
 export const ChatButton = styled("button", {
@@ -32,4 +33,56 @@ export const ChatButton = styled("button", {
   alignItems: "center",
   justifyContent: "center",
   marginLeft: "10px",
+});
+
+export const ChatBodyContainer = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  height: "100%",
+  overflowY: "auto",
+  padding: "10px 0",
+  "&::-webkit-scrollbar": {
+    width: "0.4em",
+  },
+  "&::-webkit-scrollbar-track": {
+    boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+    webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+  },
+});
+
+export const MessageContainer = styled("div", {
+  display: "flex",
+  "&.received": {
+    justifyContent: "flex-start",
+  },
+  "&.sent": {
+    justifyContent: "flex-end",
+  },
+});
+
+export const Message = styled("div", {
+  borderRadius: "18px",
+  padding: "8px 17px",
+  margin: "10px 0",
+  display: "flex",
+  flexDirection: "column",
+  width: "fit-content",
+  maxWidth: "60%",
+  wordBreak: "break-word",
+  "&:first-child": {
+    marginTop: "0",
+  },
+  // received message
+  "&.received": {
+    background: "#E4E6EB",
+    color: "#000",
+    justifyContent: "flex-start",
+  },
+
+  // sent message
+  "&.sent": {
+    background: "rgb(0, 132, 255)",
+    color: "#fff",
+    justifyContent: "flex-end",
+  },
 });
