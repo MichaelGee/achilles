@@ -4,7 +4,8 @@ import { Input, Spacer, Button, Container, Text, Loading } from "@nextui-org/rea
 import { GoogleIcon } from "@/components/atoms/icons/Google";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { auth } from "@/services/firebase";
+import { auth, firestore } from "@/services/firebase";
+import { doc, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
@@ -54,10 +55,16 @@ const Signup = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
-        // const user = userCredential.user;
-        // ...
+        const user = userCredential.user;
 
-        router.push("/chat");
+        // set user data to firestore
+        setDoc(doc(firestore, "users", user.uid), {
+          email: user.email,
+          uid: user.uid,
+        });
+      })
+      .then(() => {
+        router.push("/");
       })
       .catch((error) => {
         setLoading(false);
@@ -76,10 +83,16 @@ const Signup = () => {
         const token = credential?.accessToken;
         // The signed-in user info.
         const user = result.user;
-        console.log(user);
+        // set user data to firestore
+        setDoc(doc(firestore, "users", user!.uid), {
+          email: user!.email,
+          uid: user!.uid,
+        });
 
-        router.push("/chat");
         // ...
+      })
+      .then(() => {
+        router.push("/");
       })
       .catch((error) => {
         // Handle Errors here.

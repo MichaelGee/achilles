@@ -7,8 +7,9 @@ import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { auth } from "@/services/firebase";
+import { auth, firestore } from "@/services/firebase";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 //@ts-ignore
 import { Box } from "rebass";
 
@@ -49,7 +50,7 @@ const Login = () => {
         // const user = userCredential.user;
         // ...
 
-        router.push("/chat");
+        router.push("/");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -69,10 +70,15 @@ const Login = () => {
         const token = credential?.accessToken;
         // The signed-in user info.
         const user = result.user;
-        console.log(user);
-
-        router.push("/chat");
+        // set user data to firestore
+        setDoc(doc(firestore, "users", user!.uid), {
+          email: user!.email,
+          uid: user!.uid,
+        });
         // ...
+      })
+      .then(() => {
+        router.push("/");
       })
       .catch((error) => {
         // Handle Errors here.

@@ -17,13 +17,18 @@ const Navigation = () => {
         console.log(error);
       });
   };
+  // get user picture from auth
+  const user = auth.currentUser;
+  const photoURL = user!.photoURL;
+  const displayName = user!.displayName;
+
   return (
     <Navbar>
       <Navbar.Brand>
-        <Avatar squared src='https://i.pravatar.cc/150?u=a042581f4e29026024d' />
+        <Avatar squared src={photoURL!} />
       </Navbar.Brand>
       <Navbar.Content>
-        <Text>Michael Gates</Text>
+        <Text>{displayName}</Text>
       </Navbar.Content>
       <Navbar.Content>
         <Button onClick={handleLogout} light color='error' auto>
